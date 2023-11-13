@@ -1,5 +1,6 @@
 <?php
 
+require __DIR__ . '/vendor/autoload.php';
 include_once("db.php");
 
 $db = new DB();
