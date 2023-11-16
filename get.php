@@ -1,5 +1,7 @@
 <?php
 
+header("Access-Control-Allow-Origin: none");
+
 require __DIR__ . '/vendor/autoload.php';
 include_once("db.php");
 
