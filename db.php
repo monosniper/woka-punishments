@@ -77,28 +77,27 @@ class DB
         return $data[0][0];
     }
 
-    public function getItems($table, $order=false, $offset=0, $q) {
-        $query = "SELECT $table.*, $this->history_table.name FROM $table JOIN $this->history_table USING(uuid) WHERE name LIKE '%$q%'";
+    public function getItems($table, $order=false) {
+        $query = "SELECT $table.*, $this->history_table.name FROM $table JOIN $this->history_table USING(uuid)";
         if($order) {
             $query .= " ORDER BY $order DESC";
         }
-        $query .= " LIMIT $offset, $this->items_limit";
 
         $result = mysqli_query($this->db, $query);
 
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
-    public function getBans($page, $q) {
-        return $this->getItems($this->bans_table, 'time', $page * $this->items_limit, $q);
+    public function getBans() {
+        return $this->getItems($this->bans_table, 'time');
     }
 
-    public function getMutes($page, $q) {
-        return $this->getItems($this->mutes_table, 'time', $page * $this->items_limit, $q);
+    public function getMutes() {
+        return $this->getItems($this->mutes_table, 'time');
     }
 
-    public function getKicks($page, $q) {
-        return $this->getItems($this->kicks_table, 'time', $page * $this->items_limit, $q);
+    public function getKicks() {
+        return $this->getItems($this->kicks_table, 'time');
     }
 
     public function getName($uuid) {
